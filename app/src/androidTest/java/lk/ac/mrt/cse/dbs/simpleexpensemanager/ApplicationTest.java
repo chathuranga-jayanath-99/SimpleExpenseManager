@@ -92,4 +92,15 @@ public class ApplicationTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void getAccountNumbersListTest() throws InvalidAccountException {
+        String accountNo = "2000";
+        List<String> accountsListBefore = expenseManager.getAccountNumbersList();
+
+        expenseManager.addAccount(accountNo, "BOC", "Sampath", 2000.00);
+
+        List<String> accountsListAfter = expenseManager.getAccountNumbersList();
+        assertEquals(accountsListAfter.size(), accountsListBefore.size() + 1);
+    }
 }
