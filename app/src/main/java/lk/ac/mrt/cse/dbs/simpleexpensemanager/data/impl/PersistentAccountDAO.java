@@ -49,7 +49,6 @@ public class PersistentAccountDAO implements AccountDAO {
             } while (cursor.moveToNext());
         }
 
-
         // close both cursor and readableDatabase
         cursor.close();
         readableDatabase.close();
@@ -119,20 +118,32 @@ public class PersistentAccountDAO implements AccountDAO {
         writableDatabase.execSQL(queryString, new String[] {
                 account.getAccountNo(), account.getBankName(), account.getAccountHolderName(), String.valueOf(account.getBalance())
         });
-
     }
 
     @Override
     public void removeAccount(String accountNo) throws InvalidAccountException {
         SQLiteDatabase writableDatabase = this.databaseHelper.getWritableDatabase();
-        String queryString = "delete from "+ACCOUNT_TABLE+" where "+ACCOUNT_NO_COLUMN+"=?";
+        SQLiteDatabase readableDatabase = this.databaseHelper.getReadableDatabase();
 
-        Cursor cursor = writableDatabase.rawQuery(queryString, new String[]{accountNo});
+        Cursor cursor = readableDatabase.rawQuery(
+                "select * from "+ACCOUNT_TABLE+" where "+ACCOUNT_NO_COLUMN+"=?",
+                new String[]{accountNo}
+        );
 
         if (!cursor.moveToFirst()) {
             String msg = "Account " + accountNo + " is invalid.";
             throw new InvalidAccountException(msg);
         }
+        else {
+//            String queryString = "delete from "+ACCOUNT_TABLE+" where "+ACCOUNT_NO_COLUMN+"=?";
+//            writableDatabase.rawQuery(queryString, new String[]{accountNo});
+
+            writableDatabase.delete(ACCOUNT_TABLE, ACCOUNT_NO_COLUMN+"=?", new String[]{accountNo});
+        }
+
+        // close cursor and readableDatabase
+        cursor.close();
+        readableDatabase.close();
     }
 
     @Override
