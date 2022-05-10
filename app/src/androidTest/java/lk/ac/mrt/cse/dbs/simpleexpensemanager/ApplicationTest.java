@@ -71,9 +71,15 @@ public class ApplicationTest {
     public void removeAccountTest() throws InvalidAccountException {
         String accountNo = "1000";
 
+        Account account = new Account(accountNo, "BOC", "Sahan", 1450.00);
+        List<String> accountsListBefore = expenseManager.getAccountNumbersList();
+        if (!accountsListBefore.contains(accountNo)){
+            persistentAccountDAO.addAccount(account);
+        }
+
         persistentAccountDAO.removeAccount(accountNo);
-        List<String> accountNumbersList = persistentAccountDAO.getAccountNumbersList();
-        assertFalse(accountNumbersList.contains(accountNo));
+        List<String> accountNumbersListAfter = persistentAccountDAO.getAccountNumbersList();
+        assertFalse(accountNumbersListAfter.contains(accountNo));
     }
 
     @Test
