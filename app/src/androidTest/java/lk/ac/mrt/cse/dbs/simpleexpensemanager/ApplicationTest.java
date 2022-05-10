@@ -69,7 +69,7 @@ public class ApplicationTest {
 
     @Test
     public void removeAccountTest() throws InvalidAccountException {
-        String accountNo = "1000";
+        String accountNo = "1100";
 
         Account account = new Account(accountNo, "BOC", "Sahan", 1450.00);
         List<String> accountsListBefore = expenseManager.getAccountNumbersList();

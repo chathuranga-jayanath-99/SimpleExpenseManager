@@ -1,4 +1,4 @@
-#Tue May 10 13:39:28 IST 2022
+#Tue May 10 13:57:44 IST 2022
 base.0=C\:\\Users\\Chathuwa\\Desktop\\DBMS-mini-proj\\SimpleExpenseManager\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeDexDebugAndroidTest\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
