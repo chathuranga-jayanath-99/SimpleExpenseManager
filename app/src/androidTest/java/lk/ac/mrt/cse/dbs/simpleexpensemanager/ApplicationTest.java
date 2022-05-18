@@ -98,7 +98,7 @@ public class ApplicationTest {
         String accountNo = "2000";
         List<String> accountsListBefore = expenseManager.getAccountNumbersList();
 
-        expenseManager.addAccount(accountNo, "BOC", "Sampath", 2000.00);
+        expenseManager.addAccount(accountNo, "BOC", "Kamal", 2000.00);
 
         List<String> accountsListAfter = expenseManager.getAccountNumbersList();
         assertEquals(accountsListAfter.size(), accountsListBefore.size() + 1);
